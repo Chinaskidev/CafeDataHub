@@ -1,26 +1,30 @@
+# He creado esta API para predecir la exportación de café de un país en particular.
+# La API toma el nombre del país como entrada y devuelve la predicción de exportación de café para ese país.
+# La API utiliza un modelo de regresión aleatoria (Random Forest) , para hacer la predicción.
+# El modelo y el conjunto de datos se cargan en la API y se utilizan para hacer la predicción.
+
+
 from fastapi import FastAPI
 import pickle
 from pydantic import BaseModel
+import pandas as pd
 
-# Cargar el modelo
+coffe_export = pd.read_csv('data_cafe/Coffee_export.csv')
+
 with open('modelo_cafe.pkl', 'rb') as file:
     model = pickle.load(file)
 
-# Crear la aplicación FastAPI
 app = FastAPI()
 
-# Crear una clase para los datos de entrada
 class InputData(BaseModel):
-    feature1: float
-    feature2: float
+    country: str
 
 @app.post('/predict')
-def predict(data: InputData):
-    # Convertir los datos de entrada en un array 2D
-    input_data = [[data.feature1, data.feature2]]  
+def predict(input_data: InputData):
+    country_data = coffe_export[coffe_export['Country'] == input_data.country]
 
-    # Hacer una predicción con el modelo
-    prediction = model.predict(input_data)
+    country_data = country_data.drop(['Country', 'Total_export'], axis=1)
 
-    # Devolver la predicción
+    prediction = model.predict(country_data)
+
     return {'prediction': prediction[0]}
