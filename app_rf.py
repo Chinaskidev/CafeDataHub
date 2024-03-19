@@ -27,4 +27,7 @@ def predict(input_data: InputData):
 
     prediction = model.predict(country_data)
 
-    return {'prediction': prediction[0]}
+    # Convertir la predicción a una cadena con comas como separadores de miles
+    prediction_str = format(prediction[0], ",.2f")
+
+    return {'prediction': prediction_str}
