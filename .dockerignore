@@ -1,0 +1,10 @@
+# Ignorar carpetas
+env/
+img/
+Modelos/
+__pycache__/
+csv_cafe/
+
+# Ignorar archivos específicos
+cafe1.ipynb
+README.md
