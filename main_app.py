@@ -11,7 +11,7 @@ coffe_export = pd.read_csv('data_cafe/Coffee_export.csv')
 
 st.image('img/cafe.jpg', caption='Cortadora de café', use_column_width=True)
 
-st.title('Predicción de exportación de café')
+st.title('Predicción de exportación de café (En miles de sacos de 60 kg)')
 
 country = st.text_input('Introduce el nombre del país')
 
