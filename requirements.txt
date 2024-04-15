@@ -9,3 +9,4 @@ seaborn==0.13.2
 sklearning==0.0.1
 uvicorn==0.28.0
 streamlit==1.32.2
+plotly==5.20.0
